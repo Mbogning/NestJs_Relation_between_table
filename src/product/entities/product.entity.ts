@@ -1,10 +1,11 @@
 import { Type } from "class-transformer";
 import { IsDate } from "class-validator";
+import { TimeColumns } from "src/common/time-columns";
 import { Rating } from "src/rating/entities/rating.entity";
 import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Product extends BaseEntity{
+export class Product extends TimeColumns{
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -22,16 +23,6 @@ export class Product extends BaseEntity{
 
     @Column('varchar', {nullable: true, select: false})
     productImage!: string;
-
-    @IsDate()
-    @Type(() => Date)
-    @Column('datetime', {nullable: true, select: false})
-    createDate!: Date;
-
-    @IsDate()
-    @Type(() => Date)
-    @Column('datetime', {nullable: true, select: false})
-    updateDate!: Date;
 
     // @OneToMany(type => Rating, rating => rating.products, {eager: true})
     // ratings: Rating[];
